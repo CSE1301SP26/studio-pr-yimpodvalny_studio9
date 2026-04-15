@@ -6,13 +6,17 @@ public class Enemy extends Entity {
 
     private double xSpeed;
     private double ySpeed;
-    private long lastFired;
+    private double lastFired;
+
+    public static final double xSpeedVar = 0.05;
+    public static final double ySpeedVar = 0.05;
+    public static final double lastFiredVar = System.currentTimeMillis();
+    public static final double size = 0.03;
 
     public Enemy() {
-        super(Math.random() * 0.9, Math.random() * 0.8 + 0.15, 0.03, Color.RED);
-        xSpeed = Math.random() * 0.05;
-        ySpeed = Math.random() * 0.05;
-        lastFired = System.currentTimeMillis();
+        super(Math.random() * 0.9, Math.random() * 0.8 + 0.15, size, Color.RED);
+        xSpeed = Math.random()* xSpeedVar;
+        ySpeed = Math.random()* ySpeedVar;
     }
 
     public void move() {
@@ -22,16 +26,10 @@ public class Enemy extends Entity {
     }
 
     private void bounceOffWall() {
-        if(this.getXPosition() < 0) {
+        if(this.getXPosition() < 0 || this.getXPosition() > 1) {
             xSpeed = -xSpeed;
         }
-        if(this.getXPosition() > 1) {
-            xSpeed = -xSpeed;
-        }
-        if(this.getYPosition() > 1) {
-            ySpeed = -ySpeed;
-        }
-        if(this.getYPosition() < 0.15) {
+        if(this.getYPosition() > 1 || this.getYPosition() < 0.15  ) {
             ySpeed = -ySpeed;
         }
     }
@@ -41,9 +39,7 @@ public class Enemy extends Entity {
         if(now - lastFired > 1000) {
             lastFired = now;
             return true;
-        } else {
+        }
             return false;
         }
     }
-    
-}

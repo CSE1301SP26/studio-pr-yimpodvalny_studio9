@@ -6,6 +6,8 @@ import java.awt.Color;
 public class Entity {
     private double xPosition;
     private Color color;
+    private double yPosition;
+    private double size;
 
     public Entity(double x, double y, double size, Color color) {
         this.xPosition = x;
@@ -13,9 +15,6 @@ public class Entity {
         this.size = size;
         this.color = color;
     }
-
-    private double yPosition;
-    private double size;
 
     public void draw() {
         StdDraw.setPenColor(color);
@@ -36,12 +35,9 @@ public class Entity {
 
     public boolean collidesWith(Entity e) {
         double distance = Math.sqrt(Math.pow(this.xPosition - e.getXPosition(), 2) + Math.pow(this.yPosition - e.getYPosition(), 2));
-        if(distance > this.getSize() + e.getSize()) {
-            return false;
-        } else {
-            return true;
+        return distance <= this.getSize() + e.getSize();
         }
-    }
+    
 
     public void setXPosition(double x) {
         this.xPosition = x;

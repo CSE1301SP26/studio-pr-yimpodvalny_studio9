@@ -7,33 +7,34 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
 
+    public static final double xpos = 0.5;
+    public static final double ypos = 0.05;
+    public static final double sizee = 0.03;
+    public static final double movement = 0.01;
+
     private long lastFired;
 
     public Player() {
-        super(0.5, 0.05, 0.03, Color.BLACK);
+        super(xpos, ypos, sizee, Color.BLACK);
         lastFired = System.currentTimeMillis();
     }
 
     public void move() {
         if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
-            setXPosition(this.getXPosition() - 0.01);
+            setXPosition(this.getXPosition() - movement);
         }
         if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
-            setXPosition(this.getXPosition() + 0.01);
+            setXPosition(this.getXPosition() + movement);
         }
     }
 
     public boolean isFiring() {
         long now = System.currentTimeMillis();
-        if (now - lastFired > 500) {
-            if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
+        if (now - lastFired > 500 && StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
                 lastFired = now;
                 return true;
-            } else {
-                return false;
-            }
-        } else {
+        }
             return false;
         }
     }
-}
+
