@@ -15,13 +15,14 @@ public class Game {
     private int numberOfEnemies;
     private int score;
 
+    public static final int numberofEnemies = 3;
+    public static final int scores = 0;
+
     public Game() {
         player = new Player();
         enemyProjectiles = new LinkedList<>();
         playerProjectiles = new LinkedList<>();
         enemies = new LinkedList<>();
-        numberOfEnemies = 3;
-        score = 0; 
     }
 
     public void run() {
